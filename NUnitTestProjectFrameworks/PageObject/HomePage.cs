@@ -1,11 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿using NUnitTestProjectFrameworks.Test;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 namespace NUnitTestProjectSeleniumWebDriverAdvanced
 {
-    class HomePage
+    class HomePage 
     {
         private IWebDriver driver;
 

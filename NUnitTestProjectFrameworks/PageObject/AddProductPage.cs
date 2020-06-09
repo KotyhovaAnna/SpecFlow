@@ -27,23 +27,26 @@ namespace NUnitTestProjectSeleniumWebDriverAdvanced
         private IWebElement searchUnitsInStock => driver.FindElement(By.XPath("//input[@id = 'UnitsInStock']"));
         private IWebElement searchUnitsOnOrder => driver.FindElement(By.XPath("//input[@id = 'UnitsOnOrder']"));
         private IWebElement searchReorderLevel => driver.FindElement(By.XPath("//input[@id = 'ReorderLevel']"));
-
         private IWebElement searchsubmit => driver.FindElement(By.XPath("//*[@type='submit']"));
 
-        private string newproductname;
-       private IWebElement nameNewProduct => driver.FindElement(By.XPath($"//a[contains(text(),'{newproductname}')]"));
+        private string NewProductName;
+       private IWebElement nameNewProduct => driver.FindElement(By.XPath($"//a[contains(text(),'{NewProductName}')]"));
 
-        public string AssertAddNewProducts(string newproductname)
+
+        public void ButtonAllProducts()
         {
-            this.newproductname = newproductname;
-            return nameNewProduct.Text;
+            searchAll_Products.Click();
+        }
+        public void ButtonCreateNew()
+        {
+            SearchCreateNew.Click();
         }
 
 
         public AddProductPage AddNewProduct(Product product)
         {
-            new Actions(driver).Click(searchAll_Products).Build().Perform();
-            new Actions(driver).Click(SearchCreateNew).Build().Perform();
+            //new Actions(driver).Click(searchAll_Products).Build().Perform();
+            //new Actions(driver).Click(SearchCreateNew).Build().Perform();
             new Actions(driver).Click(searchProductName).SendKeys(product.searchProductName).Build().Perform();
             driver.FindElement(By.XPath($"//*[@id=\"CategoryId\"]/*[@value][text()=\"{product.searchCategoryId}\"]")).Click();
             driver.FindElement(By.XPath($"//*[@id=\"SupplierId\"]/*[@value][text()=\"{product.SearchSupplierId}\"]")).Click();
@@ -57,5 +60,15 @@ namespace NUnitTestProjectSeleniumWebDriverAdvanced
 
             return this;
         }
+        public void SendButton()
+        {
+            searchsubmit.Click();
+        }
+
+        public string AssertAddNewProducts(Product product)
+        {
+            return nameNewProduct.Text;
+        }
+
     }
 }
