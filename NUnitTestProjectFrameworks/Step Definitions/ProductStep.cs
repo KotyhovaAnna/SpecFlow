@@ -23,17 +23,11 @@ namespace NUnitTestProjectFrameworks.Step_Definitions
             driver.Url = url;
             //driver.Navigate().GoToUrl(url);
         }
-        [When(@"I type the word ""(.*)"" in the Name field")]
-        public void WhenITypeInTheName(string Name)
-        {
-            new LoginPage(driver).LoginMetod(new Login(Name, null));
 
-        }
-
-        [When(@"I type the word ""(.*)"" in the Password field")]
-        public void WhenITypeInThePassword(string Password)
+        [When(@"I type the word ""(.*)"" in the Name field and ""(.*)"" in the Password field")]
+        public void WhenITypeMyValueNameAndPussword(string name, string password)
         {
-            new LoginPage(driver).LoginMetod(new Login(null, Password));
+            new LoginPage(driver).LoginMetod(new Login(name, password));
         }
 
         [When(@"I click the login button")]
@@ -62,17 +56,31 @@ namespace NUnitTestProjectFrameworks.Step_Definitions
             new AddProductPage(driver).AddNewProduct(new Product(ProductName, null, null, null, null, null, null, null));
         }
 
-        [When(@"I select ""(.*)"" in the in section Category")]
-        public void WhenITypeInCategory(string CategoryID)
+        //[When(@"I select ""(.*)"" in the in section ""(.*)""")]
+        //public void WhenITypeInCategory(string CategoryID)
+        //{
+        //    new AddProductPage(driver).AddNewProduct(new Product(null, CategoryID, null, null, null, null, null, null));
+        //}
+
+
+        //[When(@"I select ""(.*)"" in the in section Supplier")]
+        //public void WhenITypeInSupplier(string SupplierId)
+        //{
+        //    new AddProductPage(driver).AddNewProduct(new Product(null, null, SupplierId, null, null, null, null, null));
+        //}
+
+        //[When(@"I type the word ""(.*)"" in the Category  field and ""(.*)"" in the Supplier field")]
+        //public void WhenITypeMyValueCategoryAndSupplier(int numberCategory, int numberSupplier)
+        //{
+        //    new AddProductPage(driver).CategorySupplierClick(numberCategory, numberSupplier);
+        //}
+
+        [When(@"I select Product in the in section Category")]
+        public void ISelectCategory()
         {
-            new AddProductPage(driver).AddNewProduct(new Product(null, CategoryID, null, null, null, null, null, null));
+            new AddProductPage(driver).Category();
         }
 
-        [When(@"I select ""(.*)"" in the in section Supplier")]
-        public void WhenITypeInSupplier(string SupplierId)
-        {
-            new AddProductPage(driver).AddNewProduct(new Product(null, null, SupplierId, null, null, null, null, null));
-        }
 
         [When(@"I type the value ""(.*)"" in the in section UnitPrice")]
         public void WhenITypeInUnitPrice(string UnitPrice)

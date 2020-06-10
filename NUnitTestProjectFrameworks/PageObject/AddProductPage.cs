@@ -7,6 +7,7 @@ using System.Text;
 
 namespace NUnitTestProjectSeleniumWebDriverAdvanced
 {
+
     public class AddProductPage
     {
         private IWebDriver driver;
@@ -16,11 +17,14 @@ namespace NUnitTestProjectSeleniumWebDriverAdvanced
         {
             this.driver = driver;
         }
+        //int numberCategory;
+        //int numberSupplier;
 
         private IWebElement searchAll_Products => driver.FindElement(By.XPath("//a[contains(text(), 'All Products')]"));
         private IWebElement SearchCreateNew => driver.FindElement(By.XPath("//a[contains(text(),'Create new')]"));
         private IWebElement searchProductName => driver.FindElement(By.XPath("//input[@name='ProductName'] "));
-        private IWebElement searchCategoryId => driver.FindElement(By.XPath("//*[@id=\"CategoryId\"]/*[@value][text()=\"Produce\"]"));
+        private IWebElement clicksearchCategoryId => driver.FindElement(By.XPath("//select[@id= 'CategoryId']"));
+        private IWebElement searchCategoryId => driver.FindElement(By.XPath("//select[@id= 'CategoryId']/child::option[@value = '1']"));
         private IWebElement SearchSupplierId => driver.FindElement(By.XPath("//*[@id=\"SupplierId\"]/*[@value][text()=\"Mayumi's\"]"));
         private IWebElement searchUnitPrice => driver.FindElement(By.XPath("//input[@id = 'UnitPrice']"));
         private IWebElement searchQuantityPerUnit => driver.FindElement(By.XPath("//input[@id = 'QuantityPerUnit']"));
@@ -30,7 +34,7 @@ namespace NUnitTestProjectSeleniumWebDriverAdvanced
         private IWebElement searchsubmit => driver.FindElement(By.XPath("//*[@type='submit']"));
 
         private string NewProductName;
-       private IWebElement nameNewProduct => driver.FindElement(By.XPath($"//a[contains(text(),'{NewProductName}')]"));
+        private IWebElement nameNewProduct => driver.FindElement(By.XPath($"//a[contains(text(),'{NewProductName}')]"));
 
 
         public void ButtonAllProducts()
@@ -48,7 +52,7 @@ namespace NUnitTestProjectSeleniumWebDriverAdvanced
             //new Actions(driver).Click(searchAll_Products).Build().Perform();
             //new Actions(driver).Click(SearchCreateNew).Build().Perform();
             new Actions(driver).Click(searchProductName).SendKeys(product.searchProductName).Build().Perform();
-            driver.FindElement(By.XPath($"//*[@id=\"CategoryId\"]/*[@value][text()=\"{product.searchCategoryId}\"]")).Click();
+            //driver.FindElement(By.XPath($"//*[@id=\"CategoryId\"]/*[@value][text()=\"{product.searchCategoryId}\"]")).Click();
             driver.FindElement(By.XPath($"//*[@id=\"SupplierId\"]/*[@value][text()=\"{product.SearchSupplierId}\"]")).Click();
             new Actions(driver).Click(searchUnitPrice).SendKeys(product.searchUnitPrice).Build().Perform();
             new Actions(driver).Click(searchQuantityPerUnit).SendKeys(product.searchQuantityPerUnit).Build().Perform();
@@ -57,10 +61,25 @@ namespace NUnitTestProjectSeleniumWebDriverAdvanced
             new Actions(driver).Click(searchReorderLevel).SendKeys(product.searchReorderLevel).Build().Perform();
             new Actions(driver).Click(searchsubmit).Build().Perform();
 
-
             return this;
         }
-        public void SendButton()
+        //public AddProductPage CategorySupplierClick(int numberCategory, int numberSupplier)
+        //{
+        //    this.numberCategory = numberCategory;
+        //    searchCategoryId.Click();
+
+        //    this.numberSupplier = numberSupplier;
+        //    SearchSupplierId.Click();
+        //    return this;
+        //}
+
+        public void Category()
+        {
+            new Actions(driver).Click(clicksearchCategoryId).Build().Perform();
+            searchCategoryId.Click();
+        }
+
+            public void SendButton()
         {
             searchsubmit.Click();
         }
